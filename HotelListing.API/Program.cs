@@ -1,9 +1,15 @@
+using HotelListing.API.Data;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Serilog.Sinks.SystemConsole.Themes;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Configure Services
+builder.Services.AddDbContext<HotelListingDbContext>(options => 
+{
+    options.UseSqlite(builder.Configuration.GetConnectionString("HotelListingDatabase"));
+});
 
 builder.Services.AddControllers();
 
